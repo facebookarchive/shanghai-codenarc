@@ -25,7 +25,6 @@ import org.junit.Test
 
 import static org.codenarc.test.TestUtil.captureSystemOut
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
-
 /**
  * Tests for CodeNarc command-line runner
  *
@@ -266,10 +265,13 @@ class CodeNarcTest extends AbstractTestCase {
     void setUpCodeNarcTest() {
         codeNarc = new CodeNarc()
         outputFile = new File(HTML_REPORT_FILE)
+
+        CodeNarc.setExitOnError(false)
     }
 
     @After
     void tearDownCodeNarcTest() {
+        CodeNarc.setExitOnError(true)
         outputFile.delete()
     }
 
