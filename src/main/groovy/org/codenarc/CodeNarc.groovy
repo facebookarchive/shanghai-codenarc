@@ -49,6 +49,7 @@ import org.codenarc.report.ReportWriterFactory
 @SuppressWarnings(['Println', 'PrintStackTrace'])
 class CodeNarc {
     static final LOG = Logger.getLogger(CodeNarc)
+    protected static boolean exitOnError = true
     protected static final HELP = """CodeNarc - static analysis for Groovy',
 Usage: java org.codenarc.CodeNarc [OPTIONS]
   where OPTIONS are zero or more command-line options of the form "-NAME[=VALUE]":
@@ -112,7 +113,15 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
             println "ERROR: ${t.message}"
             t.printStackTrace()
             println HELP
+
+            if (exitOnError) {
+                System.exit(1)
+            }
         }
+    }
+
+    static void setExitOnError(boolean value) {
+        exitOnError = value
     }
 
     protected void execute(String[] args) {
