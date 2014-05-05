@@ -16,3 +16,7 @@
 /.idea
 build/
 src/main/java/META-INF/
+
+out/**/*
+*.iml
+
